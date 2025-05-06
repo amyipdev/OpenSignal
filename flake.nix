@@ -58,6 +58,7 @@
           cargoInstallFlags = [ "--bin" "opensignal" ];
           doCheck = false;
           postInstall = ''
+            cp -r $src/icons $out/icons
             wrapProgram $out/bin/opensignal --set LD_LIBRARY_PATH ${pkgs.librsvg}/lib
           '';
         });
