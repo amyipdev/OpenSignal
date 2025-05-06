@@ -21,6 +21,7 @@
           pkg-config
           glib
           blueprint-compiler
+          librsvg
         ];
 
         buildInputs = with pkgs; [
@@ -34,7 +35,7 @@
           atk
           libsoup_3
           webkitgtk_6_0
-	        libshumate
+	  libshumate
           libadwaita
           openssl
           blueprint-compiler
