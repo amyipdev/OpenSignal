@@ -22,6 +22,7 @@
           glib
           blueprint-compiler
           librsvg
+          makeWrapper
         ];
 
         buildInputs = with pkgs; [
@@ -35,7 +36,7 @@
           atk
           libsoup_3
           webkitgtk_6_0
-	  libshumate
+          libshumate
           libadwaita
           openssl
           blueprint-compiler
@@ -56,6 +57,9 @@
           cargoBuildFlags = [ "--bin" "opensignal" ];
           cargoInstallFlags = [ "--bin" "opensignal" ];
           doCheck = false;
+          postInstall = ''
+            wrapProgram $out/bin/opensignal --set LD_LIBRARY_PATH ${pkgs.librsvg}/lib
+          '';
         });
       }
     );
