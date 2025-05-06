@@ -1,0 +1,442 @@
+using Gtk 4.0;
+
+Stack mainstack {
+  transition-type: slide_left;
+
+  StackPage {
+    name: "welcomepage";
+
+    child: Box welcome {
+      orientation: vertical;
+      valign: center;
+      halign: center;
+
+      Image {
+        name: "logo";
+        icon-name: "update-symbolic";
+        pixel-size: 196;
+        margin-bottom: 30;
+
+        styles [
+          "icon-dropshadow",
+        ]
+      }
+
+      Label {
+        label: _("Welcome to OpenSignal");
+        margin-bottom: 30;
+
+        styles [
+          "title-1",
+        ]
+      }
+
+      Box subtitle {
+        orientation: vertical;
+        halign: center;
+        margin-bottom: 30;
+
+        Label {
+          label: "Send a DM to every member\nof a Signal group chat";
+          justify: center;
+        }
+      }
+
+      Box {
+        orientation: vertical;
+        homogeneous: true;
+        halign: center;
+
+        Box {
+          orientation: horizontal;
+          halign: center;
+          margin-top: 18;
+
+          Button welcome-gs {
+            label: _("Get started");
+
+            styles [
+              "suggested-action",
+              "pill",
+            ]
+          }
+        }
+      }
+    };
+  }
+
+  StackPage {
+    name: "prerequisites";
+
+    child: Box {
+      orientation: vertical;
+      valign: center;
+      halign: center;
+
+      Label {
+        label: _("Checking prerequisites...");
+        margin-bottom: 30;
+
+        styles [
+          "title-1",
+        ]
+      }
+
+      Grid {
+        halign: center;
+        row-spacing: 24;
+        column-spacing: 96;
+
+        Label {
+          label: "Signal Desktop";
+          halign: start;
+
+          layout {
+            column: 0;
+            row: 0;
+          }
+
+          styles [
+            "title-3",
+          ]
+        }
+
+        Box {
+          orientation: horizontal;
+
+          Image icheck_sd {
+            icon-name: "update-symbolic";
+            margin-end: 12;
+          }
+
+          Label lcheck_sd {
+            label: "Checking...";
+            halign: end;
+          }
+
+          layout {
+            column: 1;
+            row: 0;
+          }
+        }
+
+        Label {
+          label: "signal-cli";
+          halign: start;
+
+          layout {
+            column: 0;
+            row: 1;
+          }
+
+          styles [
+            "title-3",
+          ]
+        }
+
+        Box {
+          orientation: horizontal;
+
+          Image icheck_sc {
+            icon-name: "update-symbolic";
+            margin-end: 12;
+          }
+
+          Label lcheck_sc {
+            label: "Checking...";
+            halign: end;
+          }
+
+          layout {
+            column: 1;
+            row: 1;
+          }
+        }
+      }
+
+      Box missing_dependencies {
+        halign: center;
+        homogeneous: true;
+        margin-top: 36;
+        visible: false;
+
+        Label {
+          label: "You are missing dependencies. Please install and\nconfigure them, and try again.";
+          halign: center;
+          justify: center;
+        }
+      }
+
+      Box {
+        orientation: vertical;
+        halign: center;
+        homogeneous: true;
+        margin-top: 48;
+
+        Box {
+          orientation: horizontal;
+          halign: center;
+          spacing: 24;
+
+          Button welcome-cont {
+            label: _("Next");
+            sensitive: false;
+
+            styles [
+              "pill",
+              "suggested-action",
+            ]
+          }
+
+          Button welcome-refr {
+            label: _("Check again");
+            sensitive: false;
+
+            styles [
+              "pill",
+            ]
+          }
+        }
+      }
+    };
+  }
+
+  StackPage {
+    name: "connectpage";
+
+    child: Box {
+      orientation: vertical;
+      valign: center;
+      halign: center;
+
+      Label {
+        label: _("Connect to Signal");
+        margin-bottom: 30;
+
+        styles [
+          "title-1",
+        ]
+      }
+
+      Label {
+        label: _("If you haven't set up signal-cli before,\nyou can do so now.");
+        margin-bottom: 30;
+        justify: center;
+      }
+
+      Box {
+        orientation: horizontal;
+        halign: center;
+        spacing: 8;
+
+        Label {
+          label: _("Signal ID");
+        }
+
+        Entry pnent {
+          placeholder-text: _("+15553334040");
+        }
+      }
+
+      Box {
+        orientation: vertical;
+        halign: center;
+        homogeneous: true;
+        margin-top: 30;
+
+        Box {
+          orientation: horizontal;
+          halign: center;
+          spacing: 24;
+
+          Button linkcont {
+            label: _("Continue");
+
+            styles [
+              "pill",
+              "suggested-action",
+            ]
+          }
+
+          Button linkcli {
+            label: _("Link signal-cli");
+
+            styles [
+              "pill",
+            ]
+          }
+        }
+      }
+    };
+  }
+
+  StackPage {
+    name: "main_interface";
+
+    child: Box {
+      orientation: vertical;
+      valign: center;
+      halign: center;
+
+      Label {
+        label: _("Send an OpenSignal message");
+        justify: center;
+        margin-bottom: 24;
+
+        styles [
+          "title-1",
+        ]
+      }
+
+      Label {
+        label: _("If you haven't done so recently, run\n`signal-cli receive` to refresh the cache.");
+        justify: center;
+        margin-bottom: 30;
+      }
+
+      Grid {
+        halign: center;
+        column-spacing: 120;
+        row-spacing: 24;
+
+        Label {
+          halign: start;
+          label: _("Signal Group");
+
+          layout {
+            column: 0;
+            row: 0;
+          }
+
+          styles [
+            "title-4",
+          ]
+        }
+
+        DropDown chats-drop-down {
+          halign: end;
+
+          layout {
+            column: 1;
+            row: 0;
+          }
+        }
+
+        Label {
+          halign: start;
+          label: _("Message Delay (ms)");
+
+          layout {
+            column: 0;
+            row: 1;
+          }
+
+          styles [
+            "title-4",
+          ]
+        }
+
+        Entry msg-delay {
+          placeholder-text: _("3000");
+          halign: end;
+
+          layout {
+            column: 1;
+            row: 1;
+          }
+        }
+      }
+
+      ScrolledWindow {
+        margin-top: 30;
+        height-request: 180;
+
+        TextView msgtxt {
+          left-margin: 12;
+          right-margin: 12;
+          top-margin: 12;
+          bottom-margin: 12;
+          wrap-mode: word;
+        }
+      }
+
+      Box {
+        orientation: vertical;
+        halign: center;
+        homogeneous: true;
+        margin-top: 30;
+
+        Box {
+          orientation: horizontal;
+          halign: center;
+          spacing: 24;
+
+          Button send {
+            label: _("Send");
+
+            styles [
+              "pill",
+              "suggested-action",
+            ]
+          }
+        }
+      }
+
+      ProgressBar pbar {
+        margin-top: 24;
+        visible: false;
+      }
+    };
+  }
+
+  // Signal CLI items
+  StackPage {
+    name: "signal_cli_linker";
+
+    child: Box {
+      orientation: vertical;
+      halign: center;
+      valign: center;
+
+      Label {
+        label: _("Scan the QR code to link to Signal");
+        justify: center;
+        margin-bottom: 30;
+
+        styles [
+          "title_1",
+        ]
+      }
+
+      Box {
+        halign: center;
+
+        Box {
+          Image qrcode {
+            pixel-size: 196;
+          }
+
+          margin-bottom: 10;
+          margin-top: 10;
+          margin-start: 10;
+          margin-end: 10;
+
+          styles [
+            "reset-color",
+          ]
+        }
+
+        styles [
+          "card",
+          "bg-white",
+        ]
+      }
+
+      Label timed_out {
+        label: _("Timed out. Try again with the new QR code.");
+        visible: false;
+        justify: center;
+      }
+    };
+  }
+}
