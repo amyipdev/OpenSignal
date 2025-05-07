@@ -46,6 +46,9 @@
       in {
         devShells.default = pkgs.mkShell {
           inherit nativeBuildInputs buildInputs;
+          shellHook = ''
+            echo ${pkgs.librsvg}
+          '';
         };
         packages.default = pkgs.rustPlatform.buildRustPackage (finalAttrs: {
           inherit nativeBuildInputs buildInputs;
@@ -58,8 +61,8 @@
           cargoInstallFlags = [ "--bin" "opensignal" ];
           doCheck = false;
           postInstall = ''
-            cp -r $src/icons $out/icons
-            wrapProgram $out/bin/opensignal --set LD_LIBRARY_PATH ${pkgs.librsvg}/lib
+            cp -r $src/icons $out/bin/icons
+            wrapProgram $out/bin/opensignal --set LD_LIBRARY_PATH ${pkgs.librsvg}/lib --set GDK_PIXBUF_MODULE_FILE ${pkgs.librsvg}/lib/gdk-pixbuf-2.0/2.10.0/loaders.cache
           '';
         });
       }
